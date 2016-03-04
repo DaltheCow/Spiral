@@ -12,7 +12,10 @@ function drawCircle(x,y,i) {
     context.stroke();
 }
 function addCircle() {
-    circleArray.push({i:k});
+    circleArray.push(circObj());
+}
+function circObj() {
+    return {i:k};
 }
 
 setInterval(function() {
@@ -22,10 +25,12 @@ setInterval(function() {
     }
     for(var j = 0;j<circleArray.length;j++) {
         l = circleArray.length-(j+1);
-        x = 8 * (k-circleArray[l].i) * Math.sin((k-circleArray[l].i) * 20 * Math.PI / dots) + center.x;
-        y = 8 * (k-circleArray[l].i) * Math.cos((k-circleArray[l].i) * 20 * Math.PI / dots) + center.y;
-        drawCircle(x,y,k-circleArray[l].i);
+        x = 8 * (l+k-circleArray[l].i) * Math.sin((l+k-circleArray[l].i) * 20 * Math.PI / dots) + center.x;
+        y = 8 * (l+k-circleArray[l].i) * Math.cos((l+k-circleArray[l].i) * 20 * Math.PI / dots) + center.y;
+        drawCircle(x,y,j+k-circleArray[l].i);
     }
     k+=.01;
     k = Math.round(100*k)/100;
 }, 10);
+/*for(var as = 0; as<15;as++)
+    addCircle();*/
