@@ -19,7 +19,7 @@ function circObj() {
 }
 
 setInterval(function() {
-    context.clearRect(0,0,300,300);
+    context.clearRect(0,0,500,500);
     if (k%1 === 0) {
         addCircle();
     }

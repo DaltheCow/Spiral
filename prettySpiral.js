@@ -14,7 +14,7 @@ var dots = 75;
     context.stroke();
 }*/
 setInterval(function() {
-    context.clearRect(0,0,300,300);
+    context.clearRect(0,0,500,500);
     for(var i = 0; i<dots/4; i++) {
         x = 8 * i * Math.sin(i * 20 * k * Math.PI / dots) + 158;
         y = 8 * i * Math.cos(i * 20 * k * Math.PI / dots) + 145;

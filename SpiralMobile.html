@@ -1,9 +1,23 @@
+<!--Made a spiral game for the phone-->
+<!doctype html>
+<html>
+    <head>
+      <title>Spiral</title>
+    </head>
+    <body>
+        <meta name="viewport" content="width=device-width, user-scalable=no">
+      <canvas id="screen" width="500" height="500" style="border: 10px solid black;"></canvas>
+      <script type = "text/javascript">
+
 canvas = document.getElementById("screen");
 context = canvas.getContext('2d');
 var k = 0, x, y, l;
 var dots = 75, center = {x: 250, y: 250}, count = 0, speed = 5, score = 0, currColor, hitColor = true, game = true, hit = 0;
 context.fillStyle = 'black';
 var circleArray = [];
+        var bound = canvas.getBoundingClientRect();
+        var tops = 0 - bound.top;
+        var lefts = 0 - bound.left;
 
 function drawCircle(x,y,i,color) {
     context.fillStyle = color;
@@ -25,7 +39,7 @@ function gameOver() {
     context.fillStyle = 'white';
     context.fillRect(190,215,120,30);
     context.fillStyle = 'black';
-    context.fillText("Game Over",195,230);
+    context.fillText("Game Over",200,235);
 }
 
 function randomColor() {
@@ -40,8 +54,8 @@ function randomColor() {
 function getMousePos(canvas, evt) {
     var rect = canvas.getBoundingClientRect();
     return {
-        x: evt.clientX - rect.left,
-        y: evt.clientY - rect.top
+        x: evt.touches[0].clientX + lefts-10,
+        y: evt.touches[0].clientY + tops-10
     };
 }
 
@@ -67,7 +81,7 @@ function colorChange() {
     }
 }
 
-canvas.addEventListener('mousedown',function(event) {
+canvas.addEventListener('touchstart',function(event) {
     var tempColor;
     count = 0;
     var pos = getMousePos(canvas,event);
@@ -90,15 +104,6 @@ canvas.addEventListener('mousedown',function(event) {
         }
     });
 },false);
-
-canvas.addEventListener('mousemove',function(event) {
-    if (count >= 10000) {
-        interval = setInterval(function() {
-            SpiralManagement();
-        }, speed);
-    }
-    count = 0;
-}, false);
 
 function SpiralManagement() {
     if (count > 5000) {
@@ -138,7 +143,13 @@ function SpiralManagement() {
 var interval = setInterval(function() {
     SpiralManagement();
 }, speed);
-
-
-
-
+      </script>
+    </body>
+    <div id="header">
+        Score: 0
+    </div>
+    <div>
+      <font id="color" color="black" size="5">
+      </font>
+    </div>
+</html>
